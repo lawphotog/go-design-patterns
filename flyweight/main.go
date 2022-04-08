@@ -34,6 +34,30 @@ func (f *FormattedText) Capitalise(start, end int) {
 	}
 }
 
+type TextRange struct {
+	Start, End int
+	Capitalise, Bold, Italic bool
+}
+
+func (t *TextRange) Covers(position int) bool {
+	return position >= t.Start && position <= t.End
+}
+
+type BetterFormattedText struct {
+	plainText string
+	formatting []*TextRange
+}
+
+func NewBetterFormattedText(plainText string) *BetterFormattedText {
+	return &BetterFormattedText{plainText: plainText}
+}
+
+func (b *BetterFormattedText) Range(start, end int) *TextRange {
+	r := &TextRange{start, end, false, false, false}
+	b.formatting = append(b.formatting, r)
+	return r
+}
+
 func main() {
 	fmt.Printf("app is starting ..")
 
