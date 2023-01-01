@@ -8,13 +8,14 @@ type Person interface {
 
 type person struct {
 	name string
-	age int
+	age  int
 }
 
 func (p *person) SayHello() {
 	fmt.Printf("Hi, my name is %s, I am %d years old\n", p.name, p.age)
 }
 
+// interface factory
 func NewPerson(name string, age int) Person {
 	return &person{
 		name,
